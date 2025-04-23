@@ -18,15 +18,24 @@
   # example: enable zsh
   programs.zsh ={
 	enable = true;
+	enableCompletion  = true;
+	autosuggestion.enable = true;
+	syntaxHighlighting.enable = true;
 	oh-my-zsh={
 		
 		enable=true;
 		
 		};
-	
-	};
-  # session vars, etc.
+
+	shellAliases = {
+		ll = "ls -l";
+		la = "ls -la";
+		nup = "sudo nixos-rebuild switch --flake ~/nixos-config";
+  		};
+  history.size = 10000;
+};
   home.sessionVariables = {
+
     EDITOR = "vim";
   };
 }
