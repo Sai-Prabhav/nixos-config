@@ -2,13 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs,inputs,outputs, ... }:
+{ config, pkgs, inputs, outputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -43,11 +42,9 @@
     LC_TIME = "en_IN";
   };
 
-
   # Enable the KDE Plasma Desktop Environment.
-  #services.displayManager.sddm.enable = true;
-  #services.desktopManager.plasma6.enable = true;
-
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -76,9 +73,10 @@
     isNormalUser = true;
     description = "greenflame41";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    packages = with pkgs;
+      [
+        #  thunderbird
+      ];
   };
 
   # Enable automatic login for the user.
@@ -96,20 +94,19 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    htop  
+    nixfmt
+    htop
     neofetch
     git
     hyprland
     waybar
-    mako 
+    mako
     libnotify
     swww
     kitty
     rofi-wayland
     brave
-   ];
-
-
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -137,22 +134,15 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
- 	
 
- ######### Home-manager ###########
-  
-  home-manager={
-users={
-"greenflame41"= import ./home.nix;
-};
-};
+  ######### Home-manager ###########
 
+  home-manager = { users = { "greenflame41" = import ./home.nix; }; };
 
-
- ########## Custom Edits ###########
+  ########## Custom Edits ###########
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  programs.hyprland.enable=true;
+  programs.hyprland.enable = true;
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 }
