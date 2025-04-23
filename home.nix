@@ -12,7 +12,8 @@
   # now your user-level stuff:
   home.packages = with pkgs; [
     # …any other dot-files tools…
-  ];
+  pkgs.zsh 
+ ];
 
   # example: enable zsh
   programs.zsh.enable = true;

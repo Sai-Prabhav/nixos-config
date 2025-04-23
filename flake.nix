@@ -17,7 +17,7 @@
         ./configuration.nix
         inputs.home-manager.nixosModules.default
       ];
-      specialArgs = { inherit inputs;inherit self; };
+      specialArgs = { inherit inputs self; };
     };
   };
 }
