@@ -12,12 +12,12 @@
   # now your user-level stuff:
   home.packages = with pkgs; [
     # …any other dot-files tools…
-  pkgs.zsh 
+  zsh 
  ];
 
   # example: enable zsh
   programs.zsh.enable = true;
-  programs.zsh.ohMyZsh.enable = true;
+  programs.zsh.oh-my-zsh.enable = true;
 
   # session vars, etc.
   home.sessionVariables = {
