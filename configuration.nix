@@ -43,19 +43,11 @@
     LC_TIME = "en_IN";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -85,7 +77,6 @@
     description = "greenflame41";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
     #  thunderbird
     ];
   };
@@ -108,7 +99,17 @@
     htop  
     neofetch
     git
-];
+    hyprland
+    waybar
+    mako 
+    libnotify
+    swww
+    kitty
+    rofi-wayland
+    brave
+   ];
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -151,4 +152,7 @@ users={
  ########## Custom Edits ###########
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  programs.hyprland.enable=true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 }

@@ -13,7 +13,9 @@
   home.packages = with pkgs; [
     # …any other dot-files tools…
   zsh 
+  discord
  ];
+ nixpkgs.config.allowUnfree = true;
 
   # example: enable zsh
   programs.zsh ={
@@ -28,7 +30,7 @@
 		};
 
 	shellAliases = {
-		ll = "ls -l";
+		lr = "ls -l";
 		la = "ls -la";
 		nup = "sudo nixos-rebuild switch --flake ~/nixos-config";
   		};
@@ -38,5 +40,6 @@
 
     EDITOR = "vim";
   };
+
 }
 
