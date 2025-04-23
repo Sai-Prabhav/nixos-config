@@ -16,9 +16,15 @@
  ];
 
   # example: enable zsh
-  programs.zsh.enable = true;
-  programs.zsh.oh-my-zsh.enable = true;
-
+  programs.zsh ={
+	enable = true;
+	oh-my-zsh={
+		
+		enable=true;
+		
+		};
+	
+	};
   # session vars, etc.
   home.sessionVariables = {
     EDITOR = "vim";
