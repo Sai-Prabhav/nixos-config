@@ -108,7 +108,6 @@
     htop  
     neofetch
     git
-    home-manager
 ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -139,6 +138,14 @@
   system.stateVersion = "24.11"; # Did you read the comment?
  	
 
+ ######### Home-manager ###########
+  
+  home-manager={
+specialArgs={inherit outputs;};
+user={
+"greenflame41"= import ./home.nix;
+};
+};
 
 
 
