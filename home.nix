@@ -7,8 +7,8 @@
   home.stateVersion = "24.11"; # sync with system.stateVersion
 
   # let HM install & manage itself
-  programs.home-manager.enable = false;
-
+  programs.home-manager.enable = true;
+  programs.hyprland.enable = false;
   # now your user-level stuff:
   home.packages = with pkgs; [
     # …any other dot-files tools…
@@ -17,6 +17,7 @@
     vscode
   ];
   nixpkgs.config.allowUnfree = true;
+
   # example: enable zsh
   programs.zsh = {
     enable = true;
