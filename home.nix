@@ -30,12 +30,13 @@
     };
 
     shellAliases = {
-      lr = "ls -l";
+      ll = "ls -l";
       la = "ls -la";
       nup = "sudo nixos-rebuild switch --flake ~/nixos-config";
     };
     history.size = 10000;
   };
+  programs.hyprland.enable=true;
   home.sessionVariables = {
 
     EDITOR = "vim";
