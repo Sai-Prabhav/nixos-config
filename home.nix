@@ -21,7 +21,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = ''
-      source = ~/nixos-config/hypr.conf
+      source = ~/nixos-config/hypr/hypr.conf
     '';
   };
 
