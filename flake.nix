@@ -3,9 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+     home-manager = {
+     url = "github:nix-community/home-manager";
+     inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -14,7 +14,9 @@
       system = "x86_64-linux";
       #extraSpecialArgs={inherit inputs;};
       modules =
-        [ ./configuration.nix inputs.home-manager.nixosModules.default ];
+        [ ./configuration.nix 
+        inputs.home-manager.nixosModules.default 
+        ];
       specialArgs = { inherit inputs self; };
     };
   };

@@ -7,7 +7,7 @@
   home.stateVersion = "24.11"; # sync with system.stateVersion
 
   # let HM install & manage itself
-  programs.home-manager.enable = true;
+  programs.home-manager.enable = false;
 
   # now your user-level stuff:
   home.packages = with pkgs; [
@@ -36,7 +36,6 @@
     };
     history.size = 10000;
   };
-  programs.hyprland.enable=true;
   home.sessionVariables = {
 
     EDITOR = "vim";
