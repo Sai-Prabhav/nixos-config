@@ -72,8 +72,8 @@
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "greenflame41";
+  # services.xserver.displayManager.autoLogin.enable = true;
+  # services.xserver.displayManager.autoLogin.user = "greenflame41";
 
   # Install firefox.
   programs.firefox.enable = true;

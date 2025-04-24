@@ -9,7 +9,6 @@
   # let HM install & manage itself
   programs.home-manager.enable = true;
   #programs.hyprland.enable = false;
-  wayland.windowManager.hyprland.enable=false;
   # now your user-level stuff:
   home.packages = with pkgs; [
     # …any other dot-files tools…
@@ -18,6 +17,13 @@
     vscode
   ];
   nixpkgs.config.allowUnfree = true;
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = ''
+      source = ~/nixos-config/hypr.conf
+    '';
+  };
 
   # example: enable zsh
   programs.zsh = {
