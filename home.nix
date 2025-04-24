@@ -8,7 +8,8 @@
 
   # let HM install & manage itself
   programs.home-manager.enable = true;
-  programs.hyprland.enable = false;
+  #programs.hyprland.enable = false;
+  wayland.windowManager.hyprland.enable=false;
   # now your user-level stuff:
   home.packages = with pkgs; [
     # …any other dot-files tools…
@@ -22,13 +23,9 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    oh-my-zsh = {
-
-      enable = true;
-
-    };
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+    oh-my-zsh.enable = true;
 
     shellAliases = {
       ll = "ls -l";
