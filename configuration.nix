@@ -1,17 +1,24 @@
-{ config, pkgs, inputs, outputs, ... }:
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
 
+{ config, pkgs, inputs, outputs, ... }:
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -20,7 +27,7 @@
   time.timeZone = "Asia/Kolkata";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
+  i18n.defaultLocale = "en_IN";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_IN";
@@ -34,9 +41,18 @@
     LC_TIME = "en_IN";
   };
 
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -65,15 +81,10 @@
     isNormalUser = true;
     description = "greenflame41";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs;
-      [
-        #  thunderbird
-      ];
-  };
+    packages = with pkgs; [
 
-  # Enable automatic login for the user.
-  # services.xserver.displayManager.autoLogin.enable = true;
-  # services.xserver.displayManager.autoLogin.user = "greenflame41";
+    ];
+  };
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -99,9 +110,9 @@
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
-  ];
+];
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+system.stateVersion = "24.11"; # Did you read the comment?
 
   ######### Home-manager ###########
 
@@ -115,3 +126,4 @@
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   security.sudo.wheelNeedsPassword = false;
 }
+

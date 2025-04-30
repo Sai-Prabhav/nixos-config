@@ -5,7 +5,11 @@
   home.username = "greenflame41";
   home.homeDirectory = "/home/greenflame41";
   home.stateVersion = "24.11"; # sync with system.stateVersion
-
+  programs.git = {
+    enable = true;
+    userName  = "Sai-Prabhav";
+    userEmail = "saiprabhav.ss@gmail.com";
+  };
   # let HM install & manage itself
   programs.home-manager.enable = true;
   #programs.hyprland.enable = false;
