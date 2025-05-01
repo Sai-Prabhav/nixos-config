@@ -8,6 +8,7 @@
      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+  
 
   outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {

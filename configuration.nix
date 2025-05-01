@@ -2,12 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, outputs, ... }:
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+{ config, pkgs, inputs,hardware, outputs, ... }: {
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -46,7 +44,7 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -56,9 +54,8 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -81,9 +78,11 @@
     isNormalUser = true;
     description = "greenflame41";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
 
-    ];
+    packages = with pkgs;
+      [
+
+      ];
   };
 
   # Install firefox.
@@ -95,24 +94,32 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    nixfmt
+    nixfmt-classic
+    pamixer
+    desktop-file-utils
     htop
     neofetch
     git
     hyprland
     waybar
     mako
+    networkmanagerapplet
     libnotify
     swww
     kitty
     rofi-wayland
     brave
+    jq
+    blueman
+    grim
+    swappy
+    slurp
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
-];
+  ];
 
-system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
   ######### Home-manager ###########
 
@@ -122,8 +129,13 @@ system.stateVersion = "24.11"; # Did you read the comment?
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
+
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   security.sudo.wheelNeedsPassword = false;
+  fonts.packages = with pkgs; [ nerd-fonts.fira-code cascadia-code ];
+  services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
 }
 

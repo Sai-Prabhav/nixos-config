@@ -1,0 +1,77 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": [
+    "hyprland/workspaces",
+    "wlr/taskbar",
+    "custom/open-apps"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "battery",
+    "tray"
+  ],
+  
+  "hyprland/workspaces": {
+    "on-click": "activate"
+  },
+
+  "clock": {
+    "format": "{:%a %d %b %H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y %H:%M:%S}"
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "icon-theme": "Adwaita",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "on-update": "hyprctl dispatch focuswindow address:{}",
+    "ignore-list": [
+        "org.gnome.Settings",
+        "pavucontrol"
+    ],
+    "rewrite": {
+        "Brave-browser": "brave",
+        "Code": "code",
+        "kitty": "terminal"
+    }
+},
+
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "{volume}% {icon}",
+    "format-muted": " muted",
+    "format-icons": ["", "", ""],
+    "on-click": "pamixer -t",
+    "on-scroll-up": "pamixer -i 5",
+    "on-scroll-down": "pamixer -d 5"
+  },
+
+  "network": {
+    "format-wifi": "  {essid} ({signalStrength}%)",
+    "format-ethernet": " {ifname}",
+    "format-disconnected": " Disconnected"
+  },
+
+  "battery": {
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "tray": {
+    "spacing": 10,
+    "icon-size": 18
+  }
+}
