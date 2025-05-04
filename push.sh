@@ -8,5 +8,5 @@ if ! pgrep -u "$USER" ssh-agent > /dev/null; then
 fi
 
 git add .
-git commit -m "Update $(date +%Y-%m-%d)"
+git commit -m "Update $(date '+%Y-%m-%d %H:%M:%S')"
 git push --set-upstream origin master       
