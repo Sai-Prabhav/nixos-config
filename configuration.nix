@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs,hardware, outputs, ... }: {
+{ config, pkgs, inputs, hardware, outputs, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -102,6 +102,7 @@
     hyprland
     waybar
     mako
+
     networkmanagerapplet
     libnotify
     swww
@@ -113,6 +114,9 @@
     grim
     swappy
     slurp
+    brightnessctl
+    gdb
+    gcc
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
@@ -136,5 +140,7 @@
   fonts.packages = with pkgs; [ nerd-fonts.fira-code cascadia-code ];
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
+
+  programs.ssh.startAgent = true;
 }
 
