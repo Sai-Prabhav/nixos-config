@@ -115,8 +115,7 @@
     swappy
     slurp
     brightnessctl
-    gdb
-    gcc
+    
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))

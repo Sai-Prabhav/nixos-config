@@ -15,14 +15,23 @@
   #programs.hyprland.enable = false;
   # now your user-level stuff:
   home.packages = with pkgs; [
-    # …any other dot-files tools…
     zsh
     discord
     vscode
-    python314
+    gdb
+    gcc
+    libffi
     killall
     pavucontrol
+    python3
+    python3Packages.pip
+    python3Packages.setuptools
+    python3Packages.wheel
+    python3Packages.cffi
+    mongodb
   ];
+  services.mongodb.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   wayland.windowManager.hyprland = {
@@ -52,7 +61,7 @@
     shellAliases = {
 
       ll = "ls -l";
-      c= "clear";
+      c = "clear";
       la = "ls -a";
       nup = "sudo nixos-rebuild switch --flake ~/nixos-config";
     };
@@ -68,7 +77,7 @@
     # font_family="Cascadia Code";
     settings = {
       font_size = 14;
-      font_family="Cascadia Code";
+      font_family = "Cascadia Code";
 
       confirm_os_window_close = -1;
       blur = 5;
