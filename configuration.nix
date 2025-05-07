@@ -115,7 +115,7 @@
     swappy
     slurp
     brightnessctl
-    
+
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
@@ -141,5 +141,7 @@
   hardware.bluetooth.enable = true;
 
   programs.ssh.startAgent = true;
+  services.mongodb.enable = true;
+
 }
 

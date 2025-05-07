@@ -30,7 +30,6 @@
     python3Packages.cffi
     mongodb
   ];
-  services.mongodb.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
