@@ -29,6 +29,11 @@
     python3Packages.wheel
     python3Packages.cffi
     mongodb
+    yarn
+    nodejs_23
+    nodePackages_latest.vercel
+    obsidian
+    texlive.combined.scheme-basic
   ];
 
   nixpkgs.config.allowUnfree = true;
