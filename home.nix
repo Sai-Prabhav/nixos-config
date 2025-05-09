@@ -23,17 +23,19 @@
     libffi
     killall
     pavucontrol
-    python3
-    python3Packages.pip
-    python3Packages.setuptools
-    python3Packages.wheel
-    python3Packages.cffi
+    python312
+    python312Packages.pip
+    python312Packages.notebook
+    python312Packages.jupyter_client
+    python312Packages.pyzmq
+    python312Packages.numpy
     mongodb
     yarn
     nodejs_23
     nodePackages_latest.vercel
     obsidian
-    texlive.combined.scheme-basic
+    texlive.combined.scheme-medium
+
   ];
 
   nixpkgs.config.allowUnfree = true;
