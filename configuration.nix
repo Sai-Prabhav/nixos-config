@@ -115,7 +115,8 @@
     swappy
     slurp
     brightnessctl
-
+    nnn
+    ranger
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
