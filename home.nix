@@ -102,7 +102,14 @@
       (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ lua nix ]))
     ];
   };
-  
-  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
+
+  xdg.configFile."nvim/init.lua".text = ''
+    -- Add your Lua config dir to package.path
+    package.path = vim.fn.expand("~") .. "/nixos-config/nvim/lua/?.lua;" ..
+                   vim.fn.expand("~") .. "/nixos-config/nvim/lua/?/init.lua;" ..
+                   package.path
+
+    dofile(vim.fn.expand("~") .. "/nixos-config/nvim/init.lua")
+  '';
 
 }
