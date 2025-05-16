@@ -66,11 +66,12 @@
     '';
 
     shellAliases = {
-
       ll = "ls -l";
       c = "clear";
       la = "ls -a";
       nup = "sudo nixos-rebuild switch --flake ~/nixos-config";
+      ssh-setup = ''
+        if ! pgrep -u "$USER" ssh-agent >/dev/null; then eval $(ssh-agent); fi; ssh-add ~/nixos-config/.ssh/id_ed25519'';
     };
     history.size = 10000;
   };
@@ -94,10 +95,15 @@
   };
   programs.neovim = {
     enable = true;
+    # Use extraConfig to load your custom init.lua
+    extraConfig = ''
+      vim.opt.rtp:prepend(vim.fn.expand(${./nvim}))
+    '';
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter
       (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ lua nix ]))
     ];
   };
-}
+  xdg.configFile."nvim/init.lua".source = ./nvim/loader.lua;
 
+}
