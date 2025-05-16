@@ -77,7 +77,7 @@
   };
   home.sessionVariables = {
 
-    EDITOR = "vim";
+    EDITOR = "nvim";
 
   };
   programs.kitty = {
@@ -96,14 +96,13 @@
   programs.neovim = {
     enable = true;
     # Use extraConfig to load your custom init.lua
-    extraConfig = ''
-      vim.opt.rtp:prepend(vim.fn.expand(${./nvim}))
-    '';
+
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter
       (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ lua nix ]))
     ];
   };
-  xdg.configFile."nvim/init.lua".source = ./nvim/loader.lua;
+  
+  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
 
 }
