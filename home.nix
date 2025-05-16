@@ -15,7 +15,8 @@
   #programs.hyprland.enable = false;
   # now your user-level stuff:
   home.packages = with pkgs; [
-    
+    lua-language-server
+    xclip
     gnumake
     unzip
     bluez
@@ -23,7 +24,6 @@
     zsh
     discord
     vscode
-    neovim
     gdb
     gcc
     libffi
@@ -36,7 +36,7 @@
     obsidian
     texlive.combined.scheme-medium
     (pkgs.python312.withPackages
-      (ps: with ps; [ pip numpy jupyter notebook matplotlib sympy]))
+      (ps: with ps; [ pip numpy jupyter notebook matplotlib sympy ]))
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -91,6 +91,13 @@
       background_opacity = 0.7;
       shell = "zsh";
     };
+  };
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      nvim-treesitter
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ lua nix ]))
+    ];
   };
 }
 

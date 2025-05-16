@@ -2,7 +2,6 @@
 
 if ! pgrep -u "$USER" ssh-agent >/dev/null; then
     eval $(ssh-agent)
-    echo "SSH agent started and key added."
 fi
 
 

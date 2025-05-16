@@ -117,7 +117,7 @@
     brightnessctl
     nnn
     ranger
-
+    ripgrep
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
