@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+o#!/usr/bin/env bash
 
 swww-daemon &
 swww img ~/nixos-config/hypr/background.jpg

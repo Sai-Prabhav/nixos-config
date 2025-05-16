@@ -10,7 +10,6 @@
     "clock"
   ],
   "modules-right": [
-    "custom/brightness",
     "pulseaudio",
     "network",
     "battery",

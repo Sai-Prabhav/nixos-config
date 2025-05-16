@@ -15,6 +15,9 @@
   #programs.hyprland.enable = false;
   # now your user-level stuff:
   home.packages = with pkgs; [
+
+    bluez
+    bluez-tools
     zsh
     discord
     vscode
@@ -23,19 +26,14 @@
     libffi
     killall
     pavucontrol
-    python312
-    python312Packages.pip
-    python312Packages.notebook
-    python312Packages.jupyter_client
-    python312Packages.pyzmq
-    python312Packages.numpy
     mongodb
     yarn
     nodejs_23
     nodePackages_latest.vercel
     obsidian
     texlive.combined.scheme-medium
-
+    (pkgs.python312.withPackages
+      (ps: with ps; [ pip numpy jupyter notebook matplotlib sympy]))
   ];
 
   nixpkgs.config.allowUnfree = true;

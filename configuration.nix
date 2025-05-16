@@ -102,10 +102,10 @@
     hyprland
     waybar
     mako
-
     networkmanagerapplet
     libnotify
     swww
+    gtk3
     kitty
     rofi-wayland
     brave
@@ -117,6 +117,7 @@
     brightnessctl
     nnn
     ranger
+
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
