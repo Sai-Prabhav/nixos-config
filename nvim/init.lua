@@ -2,8 +2,8 @@
 -- [[ Basic Option ]]
 require 'custom.options'
 -- [[ Fold ]]
-local opt = vim.opt
 
+local opt = vim.opt
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
@@ -39,6 +39,12 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+
+
+
+  "lervag/vimtex",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/nvim-cmp",
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
@@ -209,10 +215,9 @@ require('lazy').setup({
     end,
   },
 
-  -- LSP Plugins
-  {
-    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
+    -- LSP Plugins
+  {--lsp for nvim
+    
     'folke/lazydev.nvim',
     ft = 'lua',
     opts = {
@@ -222,8 +227,8 @@ require('lazy').setup({
       },
     },
   },
-  {
-    -- Main LSP Configuration
+
+  {-- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
@@ -239,6 +244,7 @@ require('lazy').setup({
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
     },
+
     config = function()
       local lspconfig = require("lspconfig")
       local capabilities = require('blink.cmp').get_lsp_capabilities() -- If using nvim-cmp
@@ -256,6 +262,8 @@ require('lazy').setup({
           },
         },
       })
+      
+      lspconfig.texlab.setup{}
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),

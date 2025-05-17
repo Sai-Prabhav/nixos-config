@@ -16,6 +16,7 @@
   # now your user-level stuff:
   home.packages = with pkgs; [
     lua-language-server
+    texlab
     xclip
     gnumake
     unzip
