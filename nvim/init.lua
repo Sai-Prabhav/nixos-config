@@ -10,7 +10,8 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- [[ Basic Keymaps ]]
 require 'custom.keybind'
 
-
+-- [[ Latex config ]]
+require 'custom.latex'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -43,8 +44,6 @@ require('lazy').setup({
 
 
   "lervag/vimtex",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/nvim-cmp",
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
@@ -231,14 +230,7 @@ require('lazy').setup({
   {-- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      -- Mason must be loaded before its dependents so we need to set it up here.
-      -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      -- { 'mason-org/mason.nvim', opts = {} },
-      -- 'mason-org/mason-lspconfig.nvim',
-      -- 'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-      -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by blink.cmp
@@ -262,8 +254,11 @@ require('lazy').setup({
           },
         },
       })
-      
-      lspconfig.texlab.setup{}
+
+      lspconfig.texlab.setup{
+        cmd = { "texlab" },
+        filetypes = { "tex" },
+      }
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -613,6 +608,7 @@ require('lazy').setup({
       auto_install = true,
       highlight = {
         enable = true,
+        disable = { "latex", },
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.

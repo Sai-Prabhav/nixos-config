@@ -17,6 +17,7 @@
   home.packages = with pkgs; [
     lua-language-server
     texlab
+    zathura
     xclip
     gnumake
     unzip
@@ -36,6 +37,7 @@
     nodePackages_latest.vercel
     obsidian
     texlive.combined.scheme-medium
+    tree-sitter
     (pkgs.python312.withPackages
       (ps: with ps; [ pip numpy jupyter notebook matplotlib sympy ]))
   ];
@@ -104,6 +106,11 @@
     ];
   };
 
+  xdg.configFile."zathura/zathurarc".text = ''
+    set synctex true
+    set synctex-editor-command "nvim --headless -c \"VimtexInverseSearch %{line} '%{input}'\""
+  '';
+
   xdg.configFile."nvim/init.lua".text = ''
     -- Add your Lua config dir to package.path
     package.path = vim.fn.expand("~") .. "/nixos-config/nvim/lua/?.lua;" ..
@@ -112,5 +119,7 @@
 
     dofile(vim.fn.expand("~") .. "/nixos-config/nvim/init.lua")
   '';
+
+
 
 }
