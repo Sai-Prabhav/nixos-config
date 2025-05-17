@@ -11,7 +11,7 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 require 'custom.keybind'
 
 -- [[ Latex config ]]
-require 'custom.latex'
+require 'custom.latex_config'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info

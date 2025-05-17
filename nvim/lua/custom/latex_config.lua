@@ -1,3 +1,6 @@
+-- Print a message to confirm the LaTeX configuration is loaded
+print("LaTeX configuration loaded successfully")
+
 -- Configure Neovim to use spaces instead of tabs for LaTeX files
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "tex",
