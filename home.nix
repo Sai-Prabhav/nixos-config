@@ -15,6 +15,8 @@
   #programs.hyprland.enable = false;
   # now your user-level stuff:
   home.packages = with pkgs; [
+    ffmpeg
+    vlc
     lua-language-server
     texlab
     zathura

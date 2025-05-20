@@ -1,4 +1,3 @@
-
 -- [[ Basic Option ]]
 require 'custom.options'
 -- [[ Fold ]]
@@ -10,8 +9,6 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- [[ Basic Keymaps ]]
 require 'custom.keybind'
 
--- [[ Latex config ]]
-require 'custom.latex_config'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -41,9 +38,7 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 
-
-
-  "lervag/vimtex",
+  "lervag/vimtex",             -- Ensure vimtex is loaded
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
@@ -214,9 +209,9 @@ require('lazy').setup({
     end,
   },
 
-    -- LSP Plugins
-  {--lsp for nvim
-    
+  -- LSP Plugins
+  { --lsp for nvim
+
     'folke/lazydev.nvim',
     ft = 'lua',
     opts = {
@@ -227,7 +222,7 @@ require('lazy').setup({
     },
   },
 
-  {-- Main LSP Configuration
+  { -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
 
@@ -255,7 +250,7 @@ require('lazy').setup({
         },
       })
 
-      lspconfig.texlab.setup{
+      lspconfig.texlab.setup {
         cmd = { "texlab" },
         filetypes = { "tex" },
       }
@@ -672,5 +667,35 @@ require('lazy').setup({
   },
 })
 
+
+-- [[ Load Snippets ]]
+-- First, setup LuaSnip with proper defaults
+require("luasnip").setup({
+  enable_autosnippets = true,
+  history = true,
+  update_events = "TextChanged,TextChangedI",
+  -- Enable word triggers by default for all snippets
+  region_check_events = "InsertEnter",
+  delete_check_events = "InsertLeave",
+
+})
+
+-- Then load your snippets
+require("luasnip.loaders.from_lua").lazy_load({
+  paths = { "~/nixos-config/nvim/LuaSnip" },
+  enable_autosnippets = true,
+
+})
+
+vim.cmd([[
+  autocmd BufWritePost *.lua source <afile> | LuaSnipUnlinkCurrent
+]])
+
+
+-- [[ Latex config ]]
+require 'custom.latex_config'
+
+
+require 'custom.snip'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
