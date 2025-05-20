@@ -74,7 +74,8 @@
       ll = "ls -l";
       c = "clear";
       la = "ls -a";
-      nup = "sudo nixos-rebuild switch --flake ~/nixos-config";
+      nup= "nix flake update ~/nixos-config";
+      nre = "sudo nixos-rebuild switch --flake ~/nixos-config";
       ssh-setup = ''
         if ! pgrep -u "$USER" ssh-agent >/dev/null; then eval $(ssh-agent); fi; ssh-add ~/nixos-config/.ssh/id_ed25519'';
     };
