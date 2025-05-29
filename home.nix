@@ -15,6 +15,7 @@
   #programs.hyprland.enable = false;
   # now your user-level stuff:
   home.packages = with pkgs; [
+        ftxui
         cmake
 clang-tools
     ffmpeg
