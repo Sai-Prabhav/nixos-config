@@ -10,20 +10,19 @@
     "clock"
   ],
   "modules-right": [
-    "custom/cpu",
-    "custom/memory",
+    "cpu",
+    "memory",
     "pulseaudio",
     "network",
     "battery",
-   
     "tray"
   ],
   "hyprland/workspaces": {
     "on-click": "activate"
   },
   "clock": {
-    "format": "{:%a %d %b %H:%M}",
-    "tooltip-format": "{:%A, %d %B %Y %H:%M:%S}"
+    "format": "<span  size='large'>{:%a %d %b %H:%M}</span>",
+    "tooltip-format": "<span color='#f8f8f2'>{:%A, %d %B %Y %H:%M:%S}</span>"
   },
   "wlr/taskbar": {
     "format": "{icon}",
@@ -50,8 +49,8 @@
   },
   "pulseaudio": {
     "scroll-step": 5,
-    "format": "{volume}% {icon}",
-    "format-muted": " muted",
+    "format": "<span color='#ff79c6'>{icon}  {volume} </span>",
+    "format-muted": "<span color='#6272a4'> muted</span>",
     "format-icons": [
       "",
       "",
@@ -62,38 +61,43 @@
     "on-scroll-down": "pamixer -d 5"
   },
   "network": {
-    "format-wifi": "  {essid} ({signalStrength}%)",
-    "format-ethernet": " {ifname}",
-    "format-disconnected": " Disconnected"
+    "format-wifi": "<span color='#bd93f9'>  {essid} ({signalStrength})</span>",
+    "format-ethernet": "<span color='#bd93f9'> {ifname}</span>",
+    "format-disconnected": "<span color='#ff5555'> Disconnected</span>"
   },
   "battery": {
     "states": {
       "warning": 20,
       "critical": 10
     },
-    "format": "{icon}  {capacity}%",
-    "format-charging": " {capacity}%",
+    "format": "<span>{icon}</span> <span >  {capacity}</span>",
+    "format-charging": "<span color='#50fa7b'> {capacity}</span>",
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "󰂂",
+      "󰂂",
+      "󰂂",
+      "󰂂",
+      "󰂂"
     ]
   },
- 
   "tray": {
     "spacing": 10,
     "icon-size": 18
   },
-  "custom/cpu": {
-    "exec": "bash -c \"grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5); printf \"%.0f\", usage}'\"",
-    "interval": 5,
-    "tooltip": false
+  "cpu": {
+    "format": "<span>CPU: {usage}</span>",
+    "interval": 2,
+    "states": {
+      "critical": 80,
+      "warning": 50
+    }
   },
-  "custom/memory": {
-    "exec": "bash -c \"free -h | awk '/^Mem/ {printf \"%.0f/%.0fG\", $3/1024, $2/1024}'\"",
-    "interval": 5,
-    "tooltip": false
+  "memory": {
+    "format": "<span>MEM: {percentage}</span>",
+    "interval": 2,
+    "states": {
+      "critical": 80,
+      "warning": 50
+    }
   }
 }

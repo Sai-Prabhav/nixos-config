@@ -15,6 +15,8 @@
   #programs.hyprland.enable = false;
   # now your user-level stuff:
   home.packages = with pkgs; [
+        cmake
+clang-tools
     ffmpeg
     vlc
     lua-language-server
@@ -33,7 +35,6 @@
     libffi
     killall
     pavucontrol
-    mongodb
     yarn
     nodejs_23
     nodePackages_latest.vercel

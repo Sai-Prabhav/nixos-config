@@ -38,9 +38,9 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 
-  "lervag/vimtex",             -- Ensure vimtex is loaded
+  "lervag/vimtex", -- Ensure vimtex is loaded
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -249,9 +249,15 @@ require('lazy').setup({
           },
         },
       })
+      lspconfig.clangd.setup {
 
+      }
       lspconfig.texlab.setup {
         cmd = { "texlab" },
+        format = {
+          lineLength = 80,
+          tab = "  ", -- two spaces instead of tabs
+        },
         filetypes = { "tex" },
       }
 
@@ -405,7 +411,7 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -420,8 +426,16 @@ require('lazy').setup({
           }
         end
       end,
+      formatters = {
+        latexindent = {
+          command = "latexindent",
+          args = { "-l", "-y=defaultIndent:'  '" }, -- 2 spaces
+          stdin = true,
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
+        tex = { 'latexindent' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

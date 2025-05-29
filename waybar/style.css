@@ -1,33 +1,93 @@
 * {
     font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
-    font-size: 14px;
+    font-size: 12px;
     padding: 0 6px;
     color: #ffffff;
-  }
-  
-  window#waybar {
-    background-color:rgba(86, 43, 126, 0.6);
-  }
-  
-  #workspaces button {
+}
+
+window#waybar {
+    background-color: rgba(40, 42, 54, 0.9); /* Darker, modern background */
+    border-bottom: 2px solid #bd93f9; /* Add a glowing border */
+}
+
+#workspaces button {
     background: transparent;
     color: #ffffff;
-    padding: 0 10px;
-    margin: 5px 2px ;
-    border: none;
-  }
-  
-  #workspaces button.active {
-    background-color: #4428e7;
-    color: #1e1e2e;
+    margin: 5 4px;
+    padding: 2px 4px;
     border-radius: 5px;
-  }
-  
-  #clock,
-  #pulseaudio,
-  #network,
-  #battery,
-  #tray {
-    margin: 0 6px;
-  }
-  
+    border: none;
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+#workspaces button:hover {
+    background-color: #6683db;
+    color: #ffffff;
+}
+
+#workspaces button.active {
+    background-color: #7b3be2; /* Bright green for active workspace */
+    color: #3e414e;
+
+}
+
+#clock,
+#pulseaudio,
+#network,
+#battery,
+#tray,
+#cpu,
+#memory {
+    margin: 5 4px;
+    padding: 2px 4px;
+    border-radius: 5px;
+    background-color: rgba(94, 96, 105, 0.8); /* Subtle background for modules */
+}
+
+/* Default CPU and memory colors */
+#cpu {
+    color: #c7f521; /* Red for CPU usage */
+}
+
+#memory {
+    color: #8be9fd; /* Cyan for memory usage */
+}
+
+/* CPU states */
+#cpu.warning {
+    color: #f1fa8c; /* Yellow for warning state */
+}
+
+#cpu.critical {
+    color: #2de44c; /* Bright red for critical state */
+}
+
+/* Memory states */
+#memory.warning {
+    color: #f1fa8c; /* Yellow for warning state */
+}
+
+#memory.critical {
+    color: #ff5555; /* Bright red for critical state */
+}
+
+/* Other modules */
+#battery {
+    color: #f1fa8c; /* Yellow for battery */
+}
+
+#network {
+    color: #bd93f9; /* Purple for network */
+}
+
+#tray {
+    color: #ff79c6; /* Pink for tray icons */
+}
+
+#clock {
+    color: #50fa7b; /* Green for clock */
+}
+
+.my-box {
+  font-size: 20px;
+}

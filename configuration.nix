@@ -91,6 +91,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    kdePackages.kde-gtk-config
     vim
     wget
     nixfmt-classic
