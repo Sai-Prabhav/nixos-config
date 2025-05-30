@@ -432,10 +432,14 @@ require('lazy').setup({
           args = { "-l", "-y=defaultIndent:'  '" }, -- 2 spaces
           stdin = true,
         },
+        clang_format = {
+          prepend_args = { "--style={IndentWidth: 4, TabWidth: 4, UseTab: Never,ColumnLimit: 56}" },
+        },
       },
       formatters_by_ft = {
         lua = { 'stylua' },
         tex = { 'latexindent' },
+        cpp = { "clang_format" },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
