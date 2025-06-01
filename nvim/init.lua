@@ -203,6 +203,9 @@ require('lazy').setup({
       end, { desc = '[S]earch [/] in Open Files' })
 
       -- Shortcut for searching your Neovim configuration files
+      vim.keymap.set('n', '<leader>sc', function()
+        builtin.find_files { cwd = '~/nixos-config/' }
+      end, { desc = '[S]earch [C]onfigc files' })
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = '~/nixos-config/nvim/' }
       end, { desc = '[S]earch [N]eovim files' })
@@ -249,9 +252,7 @@ require('lazy').setup({
           },
         },
       })
-      lspconfig.clangd.setup {
-
-      }
+      lspconfig.clangd.setup {}
       lspconfig.texlab.setup {
         cmd = { "texlab" },
         format = {
@@ -705,9 +706,6 @@ require("luasnip.loaders.from_lua").lazy_load({
 
 })
 
-vim.cmd([[
-  autocmd BufWritePost *.lua source <afile> | LuaSnipUnlinkCurrent
-]])
 
 
 -- [[ Latex config ]]
