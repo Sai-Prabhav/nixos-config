@@ -1,9 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, hardware, outputs, ... }: {
-  imports = [ # Include the results of the hardware scan.
+{
+  config,
+  pkgs,
+  inputs,
+  hardware,
+  outputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -76,12 +83,10 @@
   users.users.greenflame41 = {
     isNormalUser = true;
     description = "greenflame41";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
 
-    packages = with pkgs;
-      [
-
-      ];
+    packages = with pkgs; [
+    ];
   };
 
   # Install firefox.
@@ -120,7 +125,7 @@
     ranger
     ripgrep
     (pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
     }))
   ];
 
@@ -128,23 +133,21 @@
 
   ######### Home-manager ###########
 
-  home-manager = { users = { "greenflame41" = import ./home.nix; }; };
+  home-manager = {users = {"greenflame41" = import ./home.nix;};};
 
   ########## Custom Edits ###########
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
   security.sudo.wheelNeedsPassword = false;
-  fonts.packages = with pkgs; [ nerd-fonts.fira-code cascadia-code ];
+  fonts.packages = with pkgs; [nerd-fonts.fira-code cascadia-code];
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
 
   programs.ssh.startAgent = true;
   services.mongodb.enable = true;
-
 }
-

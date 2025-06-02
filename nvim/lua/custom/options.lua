@@ -6,7 +6,7 @@ vim.o.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.showmode = false
 vim.schedule(function()
-	vim.o.clipboard = 'unnamedplus'
+    vim.o.clipboard = 'unnamedplus'
 end)
 vim.o.breakindent = true
 vim.o.undofile = true
@@ -26,3 +26,5 @@ vim.o.confirm = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.textwidth = 56
+vim.g["prettier#config#print_width"] = 56

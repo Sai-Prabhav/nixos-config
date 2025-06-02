@@ -3,12 +3,11 @@ require 'custom.options'
 -- [[ Fold ]]
 
 local opt = vim.opt
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- [[ Basic Keymaps ]]
 require 'custom.keybind'
-
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -38,10 +37,9 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 
-  "lervag/vimtex", -- Ensure vimtex is loaded
+  'lervag/vimtex', -- Ensure vimtex is loaded
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -56,8 +54,7 @@ require('lazy').setup({
     },
   },
 
-
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
@@ -126,7 +123,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -236,14 +233,14 @@ require('lazy').setup({
     },
 
     config = function()
-      local lspconfig = require("lspconfig")
+      local lspconfig = require 'lspconfig'
       local capabilities = require('blink.cmp').get_lsp_capabilities() -- If using nvim-cmp
 
       -- define all your lsp here
       --  also add formater and snippets
-      lspconfig.lua_ls.setup({
-        cmd = { "lua-language-server" },
-        filetypes = { "lua" },
+      lspconfig.lua_ls.setup {
+        cmd = { 'lua-language-server' },
+        filetypes = { 'lua' },
         settings = {
           Lua = {
             completion = {
@@ -251,15 +248,32 @@ require('lazy').setup({
             },
           },
         },
-      })
+      }
       lspconfig.clangd.setup {}
       lspconfig.texlab.setup {
-        cmd = { "texlab" },
+        cmd = { 'texlab' },
         format = {
           lineLength = 80,
-          tab = "  ", -- two spaces instead of tabs
+          tab = '  ', -- two spaces instead of tabs
         },
-        filetypes = { "tex" },
+        filetypes = { 'tex' },
+      }
+
+      -- JS/TS/React (tsx/jsx)
+      lspconfig.ts_ls.setup {
+        capabilities = capabilities,
+        filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+        cmd = { 'typescript-language-server', '--stdio' },
+      }
+
+      -- HTML
+      lspconfig.html.setup {
+        capabilities = capabilities,
+      }
+
+      -- CSS
+      lspconfig.cssls.setup {
+        capabilities = capabilities,
       }
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -429,23 +443,33 @@ require('lazy').setup({
       end,
       formatters = {
         latexindent = {
-          command = "latexindent",
-          args = { "-l", "-y=defaultIndent:'  '" }, -- 2 spaces
+          command = 'latexindent',
+          args = { '-l', "-y=defaultIndent:'  '" }, -- 2 spaces
           stdin = true,
         },
         clang_format = {
-          prepend_args = { "--style={IndentWidth: 4, TabWidth: 4, UseTab: Never,ColumnLimit: 56}" },
+          prepend_args = { '--style={IndentWidth: 4, TabWidth: 4, UseTab: Never,ColumnLimit: 56}' },
+        },
+        prettierd = {
+          prepend_args = { '--print-width', '56' },
         },
       },
       formatters_by_ft = {
         lua = { 'stylua' },
+        markdown = { 'prettierd' },
+        nix = { 'alejandra' },
         tex = { 'latexindent' },
-        cpp = { "clang_format" },
+        cpp = { 'clang_format' },
+        javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
+        json = { 'prettierd' },
+        html = { 'prettierd' },
+        css = { 'prettierd' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        -- javascript = { "prettierdd", "prettierd", stop_after_first = true },
       },
     },
   },
@@ -622,7 +646,7 @@ require('lazy').setup({
       auto_install = true,
       highlight = {
         enable = true,
-        disable = { "latex", },
+        disable = { 'latex' },
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
@@ -654,9 +678,7 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-
-  require 'custom.web-dev'
-
+  require 'custom.web-dev',
 }, {
   ui = {
 
@@ -678,31 +700,25 @@ require('lazy').setup({
   },
 })
 
-
 -- [[ Load Snippets ]]
 -- First, setup LuaSnip with proper defaults
-require("luasnip").setup({
+require('luasnip').setup {
   enable_autosnippets = true,
   history = true,
-  update_events = "TextChanged,TextChangedI",
+  update_events = 'TextChanged,TextChangedI',
   -- Enable word triggers by default for all snippets
-  region_check_events = "InsertEnter",
-  delete_check_events = "InsertLeave",
-
-})
+  region_check_events = 'InsertEnter',
+  delete_check_events = 'InsertLeave',
+}
 
 -- Then load your snippets
-require("luasnip.loaders.from_lua").lazy_load({
-  paths = { "~/nixos-config/nvim/LuaSnip" },
+require('luasnip.loaders.from_lua').lazy_load {
+  paths = { '~/nixos-config/nvim/LuaSnip' },
   enable_autosnippets = true,
-
-})
-
-
+}
 
 -- [[ Latex config ]]
 require 'custom.latex_config'
-
 
 require 'custom.snip'
 -- The line beneath this is called `modeline`. See `:help modeline`
