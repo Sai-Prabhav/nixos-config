@@ -450,26 +450,26 @@ require('lazy').setup({
         clang_format = {
           prepend_args = { '--style={IndentWidth: 4, TabWidth: 4, UseTab: Never,ColumnLimit: 56}' },
         },
-        prettierd = {
+        prettier = {
           prepend_args = { '--print-width', '56' },
         },
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        markdown = { 'prettierd' },
+        markdown = { 'prettier' },
         nix = { 'alejandra' },
         tex = { 'latexindent' },
         cpp = { 'clang_format' },
-        javascript = { 'prettierd' },
-        typescript = { 'prettierd' },
-        json = { 'prettierd' },
-        html = { 'prettierd' },
-        css = { 'prettierd' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        json = { 'prettier' },
+        html = { 'prettier' },
+        css = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierdd", "prettierd", stop_after_first = true },
+        -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
   },

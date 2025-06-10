@@ -97,6 +97,8 @@
 
   environment.systemPackages = with pkgs; [
     kdePackages.kde-gtk-config
+    seahorse
+    gnome-keyring
     vim
     wget
     nixfmt-classic
@@ -149,5 +151,9 @@
   hardware.bluetooth.enable = true;
 
   programs.ssh.startAgent = true;
-  services.mongodb.enable = true;
+  services.mongodb.enable = false;
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.hyprland.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 }

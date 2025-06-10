@@ -4,26 +4,24 @@
   lib,
   ...
 }: {
-  # match your user
   home.username = "greenflame41";
   home.homeDirectory = "/home/greenflame41";
-  home.stateVersion = "24.11"; # sync with system.stateVersion
+  home.stateVersion = "24.11";
   programs.git = {
     enable = true;
     userName = "Sai-Prabhav";
     userEmail = "saiprabhav.ss@gmail.com";
   };
-  # let HM install & manage itself
+
   programs.home-manager.enable = true;
-  #programs.hyprland.enable = false;
-  # now your user-level stuff:
+
   home.packages = with pkgs; [
     alejandra
     ncurses
     ftxui
     cmake
     clang-tools
-    prettierd
+    nodePackages_latest.prettier
     tailwindcss-language-server
     typescript
     stylua
@@ -65,8 +63,12 @@
       source = ~/nixos-config/hypr/hypr.conf
     '';
   };
+  home.file.".prettierrc".text = ''
+    {
+      "printWidth": 56
+    }
+  '';
 
-  # example: enable zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -81,7 +83,7 @@
       }
     ];
     initContent = ''
-      # To customize prompt, run `p10k configure`
+
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
 
@@ -101,7 +103,7 @@
   };
   programs.kitty = {
     enable = true;
-    # font_family="Cascadia Code";
+
     settings = {
       font_size = 14;
       font_family = "Cascadia Code";
@@ -114,7 +116,6 @@
   };
   programs.neovim = {
     enable = true;
-    # Use extraConfig to load your custom init.lua
 
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter
@@ -123,16 +124,55 @@
   };
 
   xdg.configFile."zathura/zathurarc".text = ''
+    set selection-clipboard clipboard
     set synctex true
     set synctex-editor-command "nvim --headless -c \"VimtexInverseSearch %{line} '%{input}'\""
-  '';
+
+    set notification-error-bg       rgba(255,85,85,1)
+    set notification-error-fg       rgba(248,248,242,1)
+    set notification-warning-bg     rgba(255,184,108,1)
+    set notification-warning-fg     rgba(68,71,90,1)
+    set notification-bg             rgba(40,42,54,1)
+    set notification-fg             rgba(248,248,242,1)
+
+    set completion-bg               rgba(40,42,54,1)
+    set completion-fg               rgba(98,114,164,1)
+    set completion-group-bg         rgba(40,42,54,1)
+    set completion-group-fg         rgba(98,114,164,1)
+    set completion-highlight-bg     rgba(68,71,90,1)
+    set completion-highlight-fg     rgba(248,248,242,1)
+
+    set index-bg                    rgba(40,42,54,1)
+    set index-fg                    rgba(248,248,242,1)
+    set index-active-bg             rgba(68,71,90,1)
+    set index-active-fg             rgba(248,248,242,1)
+
+    set inputbar-bg                 rgba(40,42,54,1)
+    set inputbar-fg                 rgba(248,248,242,1)
+    set statusbar-bg                rgba(40,42,54,1)
+    set statusbar-fg                rgba(248,248,242,1)
+
+    set highlight-color             rgba(255,184,108,0.5)
+    set highlight-active-color      rgba(255,121,198,0.5)
+
+    set default-bg                  rgba(40,42,54,1)
+    set default-fg                  rgba(248,248,242,1)
+
+    set render-loading              true
+    set render-loading-fg           rgba(40,42,54,1)
+    set render-loading-bg           rgba(248,248,242,1)
+    set recolor-lightcolor          rgba(40,42,54,1)
+    set recolor-darkcolor           rgba(248,248,242,1)
+
+    set adjust-open width
+    set recolor true  '';
 
   xdg.configFile."nvim/init.lua".text = ''
     -- Add your Lua config dir to package.path
-    package.path = vim.fn.expand("~") .. "/nixos-config/nvim/lua/?.lua;" ..
-                   vim.fn.expand("~") .. "/nixos-config/nvim/lua/?/init.lua;" ..
+    package.path = vim.fn.expand("~").. "/nixos-config/nvim/lua/?.lua;" ..
+                   vim.fn.expand("~").. "/nixos-config/nvim/lua/?/init.lua;" ..
                    package.path
 
-    dofile(vim.fn.expand("~") .. "/nixos-config/nvim/init.lua")
+    dofile(vim.fn.expand("~").. "/nixos-config/nvim/init.lua")
   '';
 }
