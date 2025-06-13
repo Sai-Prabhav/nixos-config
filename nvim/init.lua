@@ -3,8 +3,6 @@ require 'custom.options'
 -- [[ Fold ]]
 
 local opt = vim.opt
-opt.foldmethod = 'expr'
-opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- [[ Basic Keymaps ]]
 require 'custom.keybind'
@@ -249,6 +247,7 @@ require('lazy').setup({
           },
         },
       }
+      lspconfig.pyright.setup {}
       lspconfig.clangd.setup {}
       lspconfig.texlab.setup {
         cmd = { 'texlab' },
@@ -466,7 +465,7 @@ require('lazy').setup({
         html = { 'prettier' },
         css = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },

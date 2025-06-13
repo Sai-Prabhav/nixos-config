@@ -16,11 +16,10 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
+    llvmPackages_20.clang-tools
     alejandra
     ncurses
     ftxui
-    cmake
-    clang-tools
     nodePackages_latest.prettier
     tailwindcss-language-server
     typescript
@@ -46,13 +45,23 @@
     killall
     pavucontrol
     yarn
-    nodejs_23
-    nodePackages_latest.vercel
     obsidian
     texlive.combined.scheme-medium
     tree-sitter
+    pkgs.nodejs # Required for pyright
+    pkgs.pyright
     (pkgs.python312.withPackages
-      (ps: with ps; [pip numpy jupyter notebook matplotlib sympy]))
+      (ps:
+        with ps; [
+          pip
+          black
+          isort
+          numpy
+          jupyter
+          notebook
+          matplotlib
+          sympy
+        ]))
   ];
 
   nixpkgs.config.allowUnfree = true;

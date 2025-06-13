@@ -1,30 +1,36 @@
+local O = vim.opt
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.mouse = 'a'
-vim.o.showmode = false
+vim.g['prettier#config#print_width'] = 56
+
+O.number = true
+O.relativenumber = true
+O.mouse = 'a'
+O.showmode = false
 vim.schedule(function()
-    vim.o.clipboard = 'unnamedplus'
+  O.clipboard = 'unnamedplus'
 end)
-vim.o.breakindent = true
-vim.o.undofile = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.signcolumn = 'yes'
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-vim.o.splitright = true
-vim.o.splitbelow = true
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.o.inccommand = 'split'
-vim.o.cursorline = true
-vim.o.scrolloff = 13
-vim.o.confirm = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.textwidth = 56
-vim.g["prettier#config#print_width"] = 56
+O.breakindent = true
+O.undofile = true
+O.ignorecase = true
+O.smartcase = true
+O.signcolumn = 'yes'
+O.updatetime = 250
+O.timeoutlen = 300
+O.splitright = true
+O.splitbelow = true
+O.list = true
+O.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+O.inccommand = 'split'
+O.cursorline = true
+O.scrolloff = 13
+O.confirm = true
+O.tabstop = 4
+O.shiftwidth = 4
+O.expandtab = true
+O.textwidth = 56
+O.foldmethod = 'expr'
+O.foldexpr = 'nvim_treesitter#foldexpr()'
+O.foldlevelstart = 99
