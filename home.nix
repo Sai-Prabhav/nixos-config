@@ -14,12 +14,15 @@
   };
 
   programs.home-manager.enable = true;
-
   home.packages = with pkgs; [
+    gdtoolkit_4
+    godot
+    aseprite
     llvmPackages_20.clang-tools
     alejandra
     ncurses
     ftxui
+    zip
     nodePackages_latest.prettier
     tailwindcss-language-server
     typescript
@@ -32,6 +35,7 @@
     texlab
     zathura
     xclip
+    gimp
     gnumake
     unzip
     bluez
@@ -48,6 +52,7 @@
     obsidian
     texlive.combined.scheme-medium
     tree-sitter
+
     pkgs.nodejs # Required for pyright
     pkgs.pyright
     (pkgs.python312.withPackages
@@ -131,7 +136,6 @@
       (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [lua nix]))
     ];
   };
-
   xdg.configFile."zathura/zathurarc".text = ''
     set selection-clipboard clipboard
     set synctex true

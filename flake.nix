@@ -3,9 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+
     home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
     };
   };
 
@@ -19,6 +19,7 @@
       #extraSpecialArgs={inherit inputs;};
       modules = [
         ./configuration.nix
+
         inputs.home-manager.nixosModules.default
       ];
 

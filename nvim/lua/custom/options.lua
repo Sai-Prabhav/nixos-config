@@ -34,3 +34,5 @@ O.textwidth = 56
 O.foldmethod = 'expr'
 O.foldexpr = 'nvim_treesitter#foldexpr()'
 O.foldlevelstart = 99
+
+vim.g.vimtex_view_method = 'zathura'

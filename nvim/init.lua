@@ -34,7 +34,20 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  {
 
+    'github/copilot.vim',
+    'robitx/gp.nvim',
+    config = function()
+      local conf = {
+        -- For customization, refer to Install > Configuration in the Documentation/Readme
+        openai_api_key = { 'cat', './api' },
+      }
+      require('gp').setup(conf)
+
+      -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+    end,
+  },
   'lervag/vimtex', -- Ensure vimtex is loaded
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
@@ -233,9 +246,14 @@ require('lazy').setup({
     config = function()
       local lspconfig = require 'lspconfig'
       local capabilities = require('blink.cmp').get_lsp_capabilities() -- If using nvim-cmp
-
       -- define all your lsp here
       --  also add formater and snippets
+      --
+      lspconfig.gdscript.setup {
+        cmd = { 'nc', '127.0.0.1', '6005' }, -- use correct IP and port
+        filetypes = { 'gd', 'gdscript' },
+        root_dir = require('lspconfig.util').root_pattern 'project.godot',
+      }
       lspconfig.lua_ls.setup {
         cmd = { 'lua-language-server' },
         filetypes = { 'lua' },
@@ -454,6 +472,7 @@ require('lazy').setup({
         },
       },
       formatters_by_ft = {
+        gdscript = { 'gdformat' },
         lua = { 'stylua' },
         markdown = { 'prettier' },
         nix = { 'alejandra' },
