@@ -83,6 +83,7 @@ local greek = {
 
 -- Common math symbols (binary operators, logic, set theory, etc.)
 local symbols = {
+  'gra',
   'pmod',
   'mid',
   'nmid',

@@ -8,6 +8,38 @@ local i = ls.insert_node
 local function in_mathzone()
   return vim.fn['vimtex#syntax#in_mathzone']() == 1
 end
+local function one_arg_commands(com, priority)
+  priority = priority or 200
+  return s({
+    trig = com,
+    snippetType = 'autosnippet',
+    priority = priority,
+    dscr = 'Insert \\' .. com .. '{}',
+    condition = in_mathzone,
+  }, {
+    t(' \\' .. com .. '{'),
+    i(1),
+    t '}',
+    i(0),
+  })
+end
+local function sumlike(com, priority)
+  priority = priority or 200
+  return s({
+    trig = com,
+    snippetType = 'autosnippet',
+    priority = priority,
+    dscr = 'Insert \\' .. com .. '^{}_{}',
+    condition = in_mathzone,
+  }, {
+    t('\\' .. com .. '_{'),
+    i(1),
+    t '}^{',
+    i(2),
+    t '} ',
+    i(0),
+  })
+end
 
 require('nvim-autopairs').get_rule('('):with_pair(function(opts)
   return not require('luasnip').session.current_nodes[opts.buf]
@@ -15,6 +47,70 @@ end)
 -- Return a table of snippets
 return {
   -- Text-related snippets
+  one_arg_commands 'hat',
+  one_arg_commands 'norm',
+  sumlike('int', 100),
+  sumlike('oint', 200),
+  sumlike('sum', 200),
+  s({
+    trig = '...',
+    snippetType = 'autosnippet',
+    priority = 100,
+    dscr = 'Insert \\cdots',
+    condition = in_mathzone,
+  }, {
+    t '\\cdots ',
+  }),
+
+  s({
+    trig = 'xxx',
+    snippetType = 'autosnippet',
+    priority = 100,
+    dscr = 'Insert \\times',
+    condition = in_mathzone,
+  }, {
+    t '\\times ',
+  }),
+  s({
+    trig = 'par',
+    snippetType = 'autosnippet',
+    priority = 100,
+    dscr = 'Insert \\partial{}',
+    condition = in_mathzone,
+  }, {
+    t '\\partial{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+
+  s({
+    trig = 'dpar',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'Insert \\partial{}',
+    condition = in_mathzone,
+  }, {
+    t '\\frac{\\partial{',
+    i(1),
+    t '}}{\\partial{',
+    i(2),
+    t '}}',
+
+    i(0),
+  }),
+  s({
+    trig = 'vec',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'Insert \\vec{}',
+    condition = in_mathzone,
+  }, {
+    t '\\vec{',
+    i(1),
+    t '}',
+    i(0),
+  }),
   s({
     trig = 'text',
     snippetType = 'autosnippet',
@@ -58,13 +154,114 @@ return {
     end),
   }),
   s({
+    trig = 'ey;',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'unit vector y',
+    condition = in_mathzone,
+  }, {
+    t ' \\hat{e}_{y} ',
+    i(0),
+  }),
+  s({
+    trig = 'ez;',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'unit vector z',
+    condition = in_mathzone,
+  }, {
+    t ' \\hat{e}_{z} ',
+    i(0),
+  }),
+  s({
+    trig = 'yii',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'x_i',
+    condition = in_mathzone,
+  }, {
+    t ' y_{i} ',
+    i(0),
+  }),
+  s({
+    trig = 'yjj',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'y_j',
+    condition = in_mathzone,
+  }, {
+    t ' y_{j} ',
+    i(0),
+  }),
+  s({
+    trig = 'xjj',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'x_j',
+    condition = in_mathzone,
+  }, {
+    t ' x_{j} ',
+    i(0),
+  }),
+  s({
+    trig = 'xii',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'x_i',
+    condition = in_mathzone,
+  }, {
+    t ' x_{i} ',
+    i(0),
+  }),
+
+  s({
+    trig = 'ex;',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'unit vector x',
+    condition = in_mathzone,
+  }, {
+    t ' \\hat{e}_{x} ',
+    i(0),
+  }),
+  s({
+    trig = 'mRR',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = '\\RR^{m}',
+    condition = in_mathzone,
+  }, {
+    t ' \\RR^{m} ',
+    i(0),
+  }),
+  s({
+    trig = 'nRR',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = '\\RR^{n}',
+    condition = in_mathzone,
+  }, {
+    t ' \\RR^{n} ',
+    i(0),
+  }),
+  s({
     trig = '+RR',
     snippetType = 'autosnippet',
     priority = 200,
     dscr = 'Positive real numbers',
     condition = in_mathzone,
   }, {
-    t '\\RR^{+}',
+    t ' \\RR^{+} ',
+    i(0),
+  }),
+  s({
+    trig = 'RR',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'real numbers',
+    condition = in_mathzone,
+  }, {
+    t ' \\RR ',
     i(0),
   }),
   s({
@@ -74,7 +271,7 @@ return {
     dscr = 'Negative real numbers',
     condition = in_mathzone,
   }, {
-    t '\\RR^{-}',
+    t ' \\RR^{-} ',
     i(0),
   }),
   s({
@@ -222,21 +419,6 @@ return {
     i(0),
   }),
 
-  s({
-    trig = 'sum',
-    snippetType = 'autosnippet',
-    priority = 200,
-    dscr = 'Insert \\sum_{...}^{...}',
-    condition = in_mathzone,
-  }, {
-    t '\\sum_{',
-    i(1),
-    t '}^{',
-    i(2),
-    t '} ',
-    i(0),
-  }),
-
   -- Formatting-related snippets
   s({
     trig = 'bf',
@@ -263,6 +445,18 @@ return {
     i(0),
   }),
   s({
+    trig = 'cal',
+    snippetType = 'autosnippet',
+    priority = 50,
+    dscr = 'Insert \\mathrm{}',
+    condition = in_mathzone,
+  }, {
+    t '\\mathcal{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+  s({
     trig = 'rm',
     snippetType = 'autosnippet',
     priority = 50,
@@ -277,15 +471,27 @@ return {
 
   -- Left-right delimiters snippets
   s({
-    trig = 'lr[',
+    trig = 'lr[]',
     snippetType = 'autosnippet',
     priority = 200,
     dscr = 'Insert \\left[ ... \\right]',
     condition = in_mathzone,
   }, {
-    t '\\left[',
+    t '\\left[ ',
     i(1),
-    t '\\right]',
+    t ' \\right] ',
+    i(0),
+  }),
+  s({
+    trig = 'lr<',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'Insert \\left< ... \\right>',
+    condition = in_mathzone,
+  }, {
+    t '\\left< ',
+    i(1),
+    t ' \\right> ',
     i(0),
   }),
   s({
@@ -295,21 +501,21 @@ return {
     dscr = 'Insert \\left( ... \\right)',
     condition = in_mathzone,
   }, {
-    t '\\left(',
+    t '\\left( ',
     i(1),
-    t '\\right)',
+    t ' \\right) ',
     i(0),
   }),
   s({
-    trig = 'lr{',
+    trig = 'lr{}',
     snippetType = 'autosnippet',
     priority = 200,
     dscr = 'Insert \\left{ ... \\right}',
     condition = in_mathzone,
   }, {
-    t '\\left\\{',
+    t '\\left\\{ ',
     i(1),
-    t '\\right\\}',
+    t ' \\right\\} ',
     i(0),
   }),
 
@@ -320,9 +526,9 @@ return {
     dscr = 'Insert \\left| ... \\right|',
     condition = in_mathzone,
   }, {
-    t '\\left|',
+    t '\\left| ',
     i(1),
-    t '\\right|',
+    t ' \\right| ',
     i(0),
   }),
 
@@ -335,7 +541,7 @@ return {
   }, {
     t '\\left\\lceil ',
     i(1),
-    t '\\right\\rceil ',
+    t ' \\right\\rceil ',
     i(0),
   }),
 
@@ -349,7 +555,7 @@ return {
   }, {
     t '\\left\\lfloor ',
     i(1),
-    t '\\right\\rfloor ',
+    t ' (\right\\rfloor ',
     i(0),
   }),
 }

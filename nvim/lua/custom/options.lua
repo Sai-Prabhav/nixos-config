@@ -9,9 +9,7 @@ O.number = true
 O.relativenumber = true
 O.mouse = 'a'
 O.showmode = false
-vim.schedule(function()
-  O.clipboard = 'unnamedplus'
-end)
+O.clipboard = 'unnamedplus'
 O.breakindent = true
 O.undofile = true
 O.ignorecase = true
