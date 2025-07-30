@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     home-manager = {
-      url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+      url = "github:/nix-community/home-manager";
     };
   };
 
