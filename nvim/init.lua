@@ -467,6 +467,7 @@ require('lazy').setup({
         end
       end,
       formatters = {
+        ormolu = { command = 'ormolu' },
         latexindent = {
           command = 'latexindent',
           args = { '-l', "-y=defaultIndent:'  '" }, -- 2 spaces

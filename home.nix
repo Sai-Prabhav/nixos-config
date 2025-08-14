@@ -15,6 +15,7 @@
 
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
+    fzf
     gdtoolkit_4
     godot
     aseprite
