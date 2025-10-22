@@ -17,7 +17,10 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -30,6 +33,19 @@
 
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      # Example settings (adjust as needed)
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      START_CHARGE_THRESH_BAT0 = 40; # Starts charging at or below 40%
+      STOP_CHARGE_THRESH_BAT0 = 80; # Stops charging at or above 80%
+    };
+  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_IN";
@@ -123,8 +139,6 @@
     swappy
     slurp
     brightnessctl
-    nnn
-    ranger
     ripgrep
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];

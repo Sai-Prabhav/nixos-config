@@ -48,6 +48,11 @@ require('lazy').setup({
       -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
     end,
   },
+  {
+    'mrcjkb/haskell-tools.nvim',
+    version = '^6', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
   'lervag/vimtex', -- Ensure vimtex is loaded
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
@@ -494,7 +499,7 @@ require('lazy').setup({
         css = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
-        haskell = { 'lsp' },
+        haskell = { 'ormolu', 'lsp' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },

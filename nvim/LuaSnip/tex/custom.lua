@@ -52,6 +52,9 @@ return {
   sumlike('int', 100),
   sumlike('oint', 200),
   sumlike('sum', 200),
+
+  sumlike('lim', 200),
+
   s({
     trig = '...',
     snippetType = 'autosnippet',
@@ -448,7 +451,7 @@ return {
     trig = 'cal',
     snippetType = 'autosnippet',
     priority = 50,
-    dscr = 'Insert \\mathrm{}',
+    dscr = 'Insert \\mathcal{}',
     condition = in_mathzone,
   }, {
     t '\\mathcal{',

@@ -16,8 +16,12 @@
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
     fzf
+    distrobox
+    unixbench
     gdtoolkit_4
+    opencv
     godot
+    gparted
     aseprite
     llvmPackages_20.clang-tools
     alejandra
@@ -25,6 +29,8 @@
     ftxui
     zip
     nodePackages_latest.prettier
+    appimage-run
+    baobab
     tailwindcss-language-server
     typescript
     stylua
@@ -118,14 +124,13 @@
   };
   programs.kitty = {
     enable = true;
-
     settings = {
       font_size = 14;
       font_family = "Cascadia Code";
 
-      confirm_os_window_close = -1;
       blur = 5;
-      background_opacity = 0.7;
+      background_opacity = 0.6;
+      confirm_os_window_close = "0";
       shell = "zsh";
     };
   };
