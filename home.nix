@@ -12,12 +12,9 @@
     userName = "Sai-Prabhav";
     userEmail = "saiprabhav.ss@gmail.com";
   };
-
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
     fzf
-    distrobox
-    unixbench
     gdtoolkit_4
     opencv
     godot
@@ -66,13 +63,13 @@
       (ps:
         with ps; [
           pip
+          pygame
           black
           isort
           numpy
           jupyter
           notebook
           matplotlib
-          sympy
         ]))
   ];
 
@@ -89,7 +86,12 @@
       "printWidth": 56
     }
   '';
-
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;

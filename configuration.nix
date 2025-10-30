@@ -21,6 +21,16 @@
     enable = true;
     dockerCompat = true;
   };
+
+  virtualisation.virtualbox.host.enable = true;
+  programs.virt-manager.enable = true;
+
+  users.groups.libvirtd.members = ["greenflame41"];
+
+  virtualisation.libvirtd.enable = true;
+
+  virtualisation.spiceUSBRedirection.enable = true;
+  users.extraGroups.vboxusers.members = ["me"];
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -99,7 +109,7 @@
   users.users.greenflame41 = {
     isNormalUser = true;
     description = "greenflame41";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["me" "networkmanager" "wheel" "libvirtd"];
 
     packages = with pkgs; [
     ];
