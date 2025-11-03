@@ -37,6 +37,7 @@
     vlc
     lua-language-server
     texlab
+    elan
     zathura
     xclip
     gimp
